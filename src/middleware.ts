@@ -16,9 +16,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (hostname.endsWith(".myvalentine.live")) {
+    const subdomain = hostname.split(".")[0];
+    url.pathname = `/sites/${subdomain}`;
+    return NextResponse.rewrite(url);
+  }
+
   if (hostname.startsWith("localhost") || hostname.startsWith("192")) {
     if (url.pathname === "/X") {
-      url.pathname = "/sites/lordzenux";
+      url.pathname = "/demo/1";
     }
     return NextResponse.rewrite(url);
   }
@@ -26,8 +32,15 @@ export function middleware(request: NextRequest) {
   if (hostname === "zenux.live") {
     return NextResponse.next();
   }
+  if (hostname === "myvalentine.live") {
+    return NextResponse.next();
+  }
 
   if (!hostname.endsWith(".zenux.live")) {
+    url.pathname = `/sites/custom/${hostname}`;
+    return NextResponse.rewrite(url);
+  }
+  if (!hostname.endsWith(".myvalentine.live")) {
     url.pathname = `/sites/custom/${hostname}`;
     return NextResponse.rewrite(url);
   }

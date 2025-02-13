@@ -9,7 +9,7 @@ const Logo = () => (
   <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="fixed top-6 right-6 z-50">
     <motion.div whileHover={{ scale: 1.1 }} className="flex items-center gap-2 bg-cyan-500/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-cyan-500/20">
       <Code className="w-6 h-6 text-cyan-400" />
-      <span className="text-cyan-400 font-bold">StackBlitz</span>
+      <span className="text-cyan-400 font-bold">Zenux</span>
     </motion.div>
   </motion.div>
 );
