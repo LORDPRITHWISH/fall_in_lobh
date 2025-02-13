@@ -33,7 +33,7 @@ const Preview = () => {
     <div className="h-screen flex flex-col items-center justify-center  p-6">
       {showConfetti && <Confetti width={width} height={height} />}
 
-      <Card className="bg-white/20 backdrop-blur-sm rounded-lg p-6 max-w-lg w-full text-center shadow-2xl">
+      <Card className="bg-white/20 backdrop-blur-sm rounded-lg p-6 max-w-xl w-full text-center shadow-2xl">
         <CardTitle>
           <h1 className="text-4xl font-bold mb-4">🎉 Congratulations! 🎉</h1>
         </CardTitle>
