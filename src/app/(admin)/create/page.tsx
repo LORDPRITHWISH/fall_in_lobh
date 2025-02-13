@@ -61,7 +61,7 @@ const CreateWebPage = () => {
     celebrationMediaUrl: "",
     celebrationMessage: "",
     subdomain: generateRandomSubdomain(),
-    domain: "zenux.live",
+    domain: "myvalentine.live",
   });
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const CreateWebPage = () => {
       celebrationMediaUrl: "",
       celebrationMessage: "",
       subdomain: generateRandomSubdomain(),
-      domain: "zenux.live",
+      domain: "myvalentine.live",
     },
   });
 
@@ -187,7 +187,7 @@ const CreateWebPage = () => {
         celebrationMediaUrl: response.data.website.celebrationMediaUrl,
         celebrationMessage: response.data.website.celebrationMessage,
         subdomain: generateRandomSubdomain(),
-        domain: "zenux.live",
+        domain: "myvalentine.live",
       });
       form.reset({
         title: response.data.website.title,
@@ -197,7 +197,7 @@ const CreateWebPage = () => {
         celebrationMediaUrl: response.data.website.celebrationMediaUrl,
         celebrationMessage: response.data.website.celebrationMessage,
         subdomain: generateRandomSubdomain(),
-        domain: "zenux.live",
+        domain: "myvalentine.live",
       });
       setTemplateLoader(false);
     } catch (error) {
@@ -220,7 +220,7 @@ const CreateWebPage = () => {
         celebrationMediaUrl: formValues.celebrationMediaUrl || "",
         celebrationMessage: formValues.celebrationMessage || "",
         subdomain: formValues.subdomain || generateRandomSubdomain(),
-        domain: "zenux.live",
+        domain: "myvalentine.live",
       });
       console.log(template);
     }
@@ -384,7 +384,7 @@ const CreateWebPage = () => {
                           name="subdomain"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>url</FormLabel>
+                              <FormLabel>Prefix</FormLabel>
                               <FormControl>
                                 <Input placeholder="Congratulations!" {...field} />
                               </FormControl>
@@ -396,8 +396,8 @@ const CreateWebPage = () => {
                           control={form.control}
                           name="domain"
                           render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>url</FormLabel>
+                            <FormItem className="self-center">
+                              <FormLabel>Domain</FormLabel>
                               <FormControl>
                                 <Input disabled placeholder="Congratulations!" {...field} />
                               </FormControl>
