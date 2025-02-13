@@ -83,25 +83,25 @@ export default function Home() {
     case "3":
       return (
         <Temp3
-          title={title}
-          messages={messages}
-          moods={moods}
-          prev={false}
-          noButtonMessages={noButtonMessages}
-          celebrationMediaUrl={celebrationMediaUrl}
-          celebrationMessage={celebrationMessage}
+          // title={title}
+          // messages={messages}
+          // moods={moods}
+          // prev={false}
+          // noButtonMessages={noButtonMessages}
+          // celebrationMediaUrl={celebrationMediaUrl}
+          // celebrationMessage={celebrationMessage}
         />
       );
     case "4":
       return (
         <Temp4
-          title={title}
-          messages={messages}
-          moods={moods}
-          prev={false}
-          noButtonMessages={noButtonMessages}
-          celebrationMediaUrl={celebrationMediaUrl}
-          celebrationMessage={celebrationMessage}
+          // title={title}
+          // messages={messages}
+          // moods={moods}
+          // prev={false}
+          // noButtonMessages={noButtonMessages}
+          // celebrationMediaUrl={celebrationMediaUrl}
+          // celebrationMessage={celebrationMessage}
         />
       );
     default:
