@@ -282,10 +282,7 @@ const CreateWebPage = () => {
               <ScrollArea className="rounded-md h-full md:h-[500px] p-4 ">
                 <div className=" mb-14">
                   <Form {...form}>
-                    <form
-                      onSubmit={form.handleSubmit(onSubmit)}
-                      className="space-y-4"
-                    >
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                       <div className="space-y-4">
                         <FormField
                           control={form.control}
@@ -307,14 +304,8 @@ const CreateWebPage = () => {
                           ))}
                           <Button
                             onClick={() => {
-                              form.setValue("messages", [
-                                ...form.getValues("messages"),
-                                "",
-                              ]);
-                              form.setValue("moods", [
-                                ...form.getValues("moods"),
-                                "",
-                              ]);
+                              form.setValue("messages", [...form.getValues("messages"), ""]);
+                              form.setValue("moods", [...form.getValues("moods"), ""]);
                             }}
                             type="button"
                             size="sm"
@@ -326,6 +317,7 @@ const CreateWebPage = () => {
                         </div>
                       </div>
                       <Separator className="my-4" />
+
                       <div className="space-y-4">
                         <h3 className="font-semibold">No Button Messages</h3>
                         {form.watch("noButtonMessages").map((_, index) => (
@@ -337,25 +329,16 @@ const CreateWebPage = () => {
                               <FormItem>
                                 <FormControl>
                                   <div className="flex gap-2">
-                                    <Input
-                                      placeholder="Enter no button message..."
-                                      {...field}
-                                    />
+                                    <Input placeholder="Enter no button message..." {...field} />
                                     <Button
                                       onClick={() => {
-                                        const newNoButtonMessages = [
-                                          ...form.getValues("noButtonMessages"),
-                                        ];
+                                        const newNoButtonMessages = [...form.getValues("noButtonMessages")];
                                         newNoButtonMessages.splice(index, 1);
-                                        form.setValue(
-                                          "noButtonMessages",
-                                          newNoButtonMessages
-                                        );
+                                        form.setValue("noButtonMessages", newNoButtonMessages);
                                       }}
                                       type="button"
                                       variant="destructive"
                                       size="icon"
-                                      className="w-6 h-6 self-center"
                                     >
                                       <X className="w-4 h-4" />
                                     </Button>
@@ -366,22 +349,13 @@ const CreateWebPage = () => {
                             )}
                           />
                         ))}
-                        <Button
-                          onClick={() =>
-                            form.setValue("noButtonMessages", [
-                              ...form.getValues("noButtonMessages"),
-                              "",
-                            ])
-                          }
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                        >
+                        <Button onClick={() => form.setValue("noButtonMessages", [...form.getValues("noButtonMessages"), ""])} type="button" size="sm" variant="outline">
                           <Plus className="w-4 h-4 mr-2" />
                           Add No Button Message
                         </Button>
                       </div>
 
+                      <Separator className="my-4" />
                       <Separator className="my-4" />
 
                       <FormField
@@ -391,10 +365,7 @@ const CreateWebPage = () => {
                           <FormItem>
                             <FormLabel>Celebration Media URL</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="https://example.com/media.gif"
-                                {...field}
-                              />
+                              <Input placeholder="https://example.com/media.gif" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -408,10 +379,7 @@ const CreateWebPage = () => {
                           <FormItem>
                             <FormLabel>Celebration Message</FormLabel>
                             <FormControl>
-                              <Input
-                                placeholder="Congratulations!"
-                                {...field}
-                              />
+                              <Input placeholder="Congratulations!" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -425,10 +393,7 @@ const CreateWebPage = () => {
                             <FormItem>
                               <FormLabel>url</FormLabel>
                               <FormControl>
-                                <Input
-                                  placeholder="Congratulations!"
-                                  {...field}
-                                />
+                                <Input placeholder="Congratulations!" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -441,11 +406,7 @@ const CreateWebPage = () => {
                             <FormItem>
                               <FormLabel>url</FormLabel>
                               <FormControl>
-                                <Input
-                                  disabled
-                                  placeholder="Congratulations!"
-                                  {...field}
-                                />
+                                <Input disabled placeholder="Congratulations!" {...field} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -453,13 +414,8 @@ const CreateWebPage = () => {
                         />
                       </div>
 
-                      <Button
-                        disabled={formLoader}
-                        type="submit"
-                        className="max-w-full absolute bottom-4 left-4"
-                        style={{ width: "calc(100% - 2rem)" }}
-                      >
-                        {formLoader && <Loader className="animate-spin" />}
+                      <Button disabled={isLoading} type="submit" className="max-w-full absolute bottom-4 left-4" style={{ width: "calc(100% - 2rem)" }}>
+                        {isLoading && <Loader className="animate-spin" />}
                         Create
                       </Button>
                     </form>
