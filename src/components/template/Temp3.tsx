@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code, Zap, BrainCircuit as Circuit, Power, Sparkles, XCircle } from "lucide-react";
 
@@ -13,7 +14,9 @@ const Logo = () => (
   </motion.div>
 );
 
-const EmotiveFace = ({ mood = "happy", noCount = 0 }) => {
+type Mood = "superHappy" | "happy" | "excited" | "hopeful" | "nervous" | "question" | "sad1" | "sad2" | "sad3" | "sad4" | "celebration";
+
+const EmotiveFace = ({ mood = "happy", noCount = 0 }: { mood?: Mood; noCount?: number }) => {
   const expressions = {
     superHappy: "🤖",
     happy: "👾",
@@ -35,7 +38,7 @@ const EmotiveFace = ({ mood = "happy", noCount = 0 }) => {
       if (noCount >= 10) return expressions.sad4;
       if (noCount >= 7) return expressions.sad3;
       if (noCount >= 4) return expressions.sad2;
-      return expressions.sad1;
+    return expressions[mood as Mood];
     }
     return expressions[mood];
   };
@@ -118,7 +121,7 @@ const PowerGrid = () => (
   </div>
 );
 
-const CelebrationPopup = ({ onClose }) => (
+const CelebrationPopup = ({ onClose }: { onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -164,14 +167,15 @@ const CelebrationPopup = ({ onClose }) => (
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", damping: 8, delay: 0.2 }}
-          className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden border border-cyan-500/20"
-        >
-          <img
+          className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden border border-cyan-500/20">
+          <Image
             src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDd6Z2E4OWF1NXJ3OWF4ZDR2bXE4M2RwdWx4YnB4ZWF6aHd6YmtnNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/108M7gCS1JSoO4/giphy.gif"
             alt="Celebration"
-            className="w-full h-full object-cover"
+            layout="fill"
+            objectFit="cover"
           />
         </motion.div>
+      </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
           <h2 className="text-3xl font-bold text-cyan-400 mb-4">System Activated! 🚀</h2>
@@ -207,8 +211,8 @@ const CelebrationPopup = ({ onClose }) => (
         >
           Initialize System 🚀
         </motion.button>
-      </div>
     </motion.div>
+      {/* </div> */}
   </motion.div>
 );
 
@@ -228,7 +232,7 @@ export default function Temp3() {
     "Initiate Neural Link? 🔮",
   ];
 
-  const moods = ["superHappy", "excited", "happy", "hopeful", "nervous", "question"];
+  const moods: Mood[] = ["superHappy", "excited", "happy", "hopeful", "nervous", "question"];
 
   const yesButtonScales = [1, 1.1, 1.2, 1.3, 1.4];
   const noButtonMessages = [
@@ -257,7 +261,7 @@ export default function Temp3() {
     }
   }, [showEmojis, messages.length]);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 

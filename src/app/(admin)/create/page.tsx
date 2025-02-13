@@ -263,19 +263,12 @@ const CreateWebPage = () => {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4">
-        <h1 className="text-xl md:text-4xl font-bold text-gray-900 m-1 md:m-8 text-center">
-          Create Valentine Page for your loved one 🥰
-        </h1>
+        <h1 className="text-xl md:text-4xl font-bold text-gray-900 m-1 md:m-8 text-center">Create Valentine Page for your loved one 🥰</h1>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6 p-1 md:p-6 bg-pink-50 rounded-lg">
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-gray-900">
-                Create Valentine Page
-              </h2>
-              <p className="text-gray-600">
-                Start creating your personalized valentine page here. Be
-                creative!
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900">Create Valentine Page</h2>
+              <p className="text-gray-600">Start creating your personalized valentine page here. Be creative!</p>
             </div>
 
             <Card className="p-2 md:p-4 space-y-4">
@@ -414,8 +407,8 @@ const CreateWebPage = () => {
                         />
                       </div>
 
-                      <Button disabled={isLoading} type="submit" className="max-w-full absolute bottom-4 left-4" style={{ width: "calc(100% - 2rem)" }}>
-                        {isLoading && <Loader className="animate-spin" />}
+                      <Button disabled={formLoader} type="submit" className="max-w-full absolute bottom-4 left-4" style={{ width: "calc(100% - 2rem)" }}>
+                        {formLoader && <Loader className="animate-spin" />}
                         Create
                       </Button>
                     </form>
@@ -425,9 +418,7 @@ const CreateWebPage = () => {
             </Card>
           </div>
           <div className="sticky top-8">
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">
-              Preview
-            </h2>
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">Preview</h2>
             <div className="bg-white/50 backdrop-blur-sm p-4 rounded-lg">
               <TemplatePreview template={template} />
             </div>
