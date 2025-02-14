@@ -20,7 +20,7 @@ const Preview = () => {
     setTimeout(() => {
       setCopyText(false);
     }, 3000);
-  }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,26 +33,26 @@ const Preview = () => {
     <div className="h-screen flex flex-col items-center justify-center  p-6">
       {showConfetti && <Confetti width={width} height={height} />}
 
-      <Card className="bg-white/20 backdrop-blur-sm rounded-lg p-6 max-w-xl w-full text-center shadow-2xl">
+      <Card className="bg-blue/20 backdrop-blur-sm rounded-lg p-6 max-w-xl w-full text-center shadow-2xl">
         <CardTitle>
           <h1 className="text-4xl font-bold mb-4">🎉 Congratulations! 🎉</h1>
         </CardTitle>
         <CardContent>
           <p className="text-lg mb-6">Your website is live! Share it with the world:</p>
           <div className="flex justify-center items-center space-x-3">
-            <div className="bg-white/30  rounded-lg p-4 mb-6">
+            <div className="bg-blue/30  rounded-lg p-4 mb-6">
               <p className="text-xl font-mono break-all">{url}</p>
             </div>
-            <Button size="lg" variant="ghost" className={`p-4 ${copyText ? "bg-green-500" : "bg-white/30"} rounded-lg self-center mb-4`} onClick={copyToClipboard}>
+            <Button size="lg" variant="ghost" className={`p-4 ${copyText ? "bg-green-500" : "bg-blue/30"} rounded-lg self-center mb-4`} onClick={copyToClipboard}>
               {copyText ? <Check className="text-4xl" /> : <Clipboard className="text-4xl" />}
             </Button>
           </div>
 
           <a
-            href={url || "#"}
+            href={url || "blue"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-white text-purple-600 font-semibold px-6 py-3 rounded-lg hover:bg-purple-100 transition-all duration-300 transform hover:scale-105"
+            className="inline-block bg-blue text-purple-600 font-semibold px-6 py-3 rounded-lg hover:bg-purple-100 transition-all duration-300 transform hover:scale-105"
           >
             Visit Your Website
           </a>

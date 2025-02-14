@@ -66,34 +66,32 @@
     --color-5: 90 100% 63%;
   }
   .emoji {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-  font-size: 1em; /* Ensure it's not getting overridden */
-}
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    font-size: 1em; /* Ensure it's not getting overridden */
+  }
 
-/* For the whole scrollbar */
-::-webkit-scrollbar {
-  width: 7px;
-  height: 10px;
-}
+  /* For the whole scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
 
-/* Track (the background of the scrollbar) */
-::-webkit-scrollbar-track {
-  background: #ffccff; /* Light pink */
-  border-radius: 5px;
-}
+  /* Track (the background of the scrollbar) */
+  ::-webkit-scrollbar-track {
+    background: #0400fa; /* Light blue */
+    border-radius: 5px;
+  }
 
-/* Thumb (the draggable part) */
-::-webkit-scrollbar-thumb {
-  background: #fd8bc4; /* Hot pink */
-  border-radius: 5px;
-}
+  /* Thumb (the draggable part) */
+  ::-webkit-scrollbar-thumb {
+    background: #00ff73; /* Hot blue */
+    border-radius: 5px;
+  }
 
-/* Thumb on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #ff57b1; /* Deeper pink */
-}
-
-
+  /* Thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00ff37; /* Deeper blue */
+  }
 }
 @layer base {
   * {

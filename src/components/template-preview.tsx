@@ -49,10 +49,8 @@ const noButtonMessages = [
 // const celebrationMediaUrl = "https://media.giphy.com/media/3o7TKz9bX9v9KzCnXK/giphy.gif";
 // const celebrationMessage = "Congratulations! You have reached the end of this page! 🎉";
 
-const celebrationMediaUrl =
-  "https://media.giphy.com/media/3o7TKz9bX9v9KzCnXK/giphy.gif";
-const celebrationMessage =
-  "Congratulations! You have reached the end of this page! 🎉";
+const celebrationMediaUrl = "https://media.giphy.com/media/3o7TKz9bX9v9KzCnXK/giphy.gif";
+const celebrationMessage = "Congratulations! You have reached the end of this page! 🎉";
 
 export function TemplatePreview({
   template,
@@ -70,13 +68,13 @@ export function TemplatePreview({
 
   return (
     <div className="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl overflow-hidden">
-{/* <<<<<<< Updated upstream
+      {/* <<<<<<< Updated upstream
       <div className="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute overflow-hidden z-60"></div>
       <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg overflow-hidden z-90"></div>
       <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg overflow-hidden z-60"></div>
       <div className="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg overflow-hidden z-60"></div>
-      <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white">
-        <div className="overflow-hidden w-full overflow-y-auto py-4z bg-pink-500 z-20">
+      <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-blue">
+        <div className="overflow-hidden w-full overflow-y-auto py-4z bg-blue-500 z-20">
 
             <Temp1
               messages={messages}
@@ -87,25 +85,24 @@ export function TemplatePreview({
               celebrationMessage={celebrationMessage}
             /> */}
 
-{/* ======= */}
+      {/* ======= */}
       <div className="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute overflow-hidden"></div>
       <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg overflow-hidden"></div>
       <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg overflow-hidden"></div>
       <div className="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg overflow-hidden"></div>
-      <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white">
+      <div className="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-blue">
         <div className="overflow-hidden">
           {/* <PreWindow> */}
-            <Temp1
-              title={template.title || "Title"}
-              messages={template.messages || messages} // Corrected typo here
-              moods={template.moods || moods}
-              prev={true}
-              noButtonMessages={template.noButtonMessages || noButtonMessages}
-              celebrationMediaUrl={template.celebrationMediaUrl || celebrationMediaUrl}
-              celebrationMessage={template.celebrationMessage || celebrationMessage}
-            />
+          <Temp1
+            title={template.title || "Title"}
+            messages={template.messages || messages} // Corrected typo here
+            moods={template.moods || moods}
+            prev={true}
+            noButtonMessages={template.noButtonMessages || noButtonMessages}
+            celebrationMediaUrl={template.celebrationMediaUrl || celebrationMediaUrl}
+            celebrationMessage={template.celebrationMessage || celebrationMessage}
+          />
           {/* </PreWindow> */}
-
         </div>
       </div>
     </div>

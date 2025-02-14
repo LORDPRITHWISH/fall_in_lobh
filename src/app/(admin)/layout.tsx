@@ -26,11 +26,10 @@ export default function AdminLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-full bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300 py-4`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-full h-full bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 py-4`}>
         <Navbar />
         {children}
         <Toaster />
-        
       </body>
     </html>
   );

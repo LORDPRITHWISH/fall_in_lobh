@@ -5,17 +5,7 @@ import { AnimatePresence, motion, MotionProps, Variants } from "motion/react";
 import { ElementType } from "react";
 
 type AnimationType = "text" | "word" | "character" | "line";
-type AnimationVariant =
-  | "fadeIn"
-  | "blurIn"
-  | "blurInUp"
-  | "blurInDown"
-  | "slideUp"
-  | "slideDown"
-  | "slideLeft"
-  | "slideRight"
-  | "scaleUp"
-  | "scaleDown";
+type AnimationVariant = "fadeIn" | "blurIn" | "blurInUp" | "blurInDown" | "slideUp" | "slideDown" | "slideLeft" | "slideRight" | "scaleUp" | "scaleDown";
 
 interface TextAnimateProps extends MotionProps {
   /**
@@ -98,10 +88,7 @@ const defaultItemVariants: Variants = {
   },
 };
 
-const defaultItemAnimationVariants: Record<
-  AnimationVariant,
-  { container: Variants; item: Variants }
-> = {
+const defaultItemAnimationVariants: Record<AnimationVariant, { container: Variants; item: Variants }> = {
   fadeIn: {
     container: defaultContainerVariants,
     item: {
@@ -364,7 +351,7 @@ export function TextAnimate({
         whileInView={startOnView ? "show" : undefined}
         animate={startOnView ? undefined : "show"}
         exit="exit"
-        className={cn("whitespace-pre-wrap", className)}
+        className={cn("bluespace-pre-wrap", className)}
         {...props}
       >
         {segments.map((segment, i) => (
@@ -372,12 +359,7 @@ export function TextAnimate({
             key={`${by}-${segment}-${i}`}
             variants={finalVariants.item}
             custom={i * staggerTimings[by]}
-            className={cn(
-              by === "line"
-                ? "block"
-                : "inline-block whitespace-pre text-xs md:text-xl font-semibold mt-2 mb-4",
-              segmentClassName
-            )}
+            className={cn(by === "line" ? "block" : "inline-block bluespace-pre text-xs md:text-xl font-semibold mt-2 mb-4", segmentClassName)}
           >
             {segment}
           </motion.span>

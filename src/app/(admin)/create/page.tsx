@@ -229,7 +229,7 @@ const CreateWebPage = () => {
       <div className="container mx-auto px-4">
         <h1 className="text-xl md:text-4xl font-bold text-gray-900 m-1 md:m-8 text-center">Create Valentine Page for your loved one 🥰</h1>
         <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-6 p-1 md:p-6 bg-pink-50 rounded-lg">
+          <div className="space-y-6 p-1 md:p-6 bg-blue-50 rounded-lg">
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-gray-900">Create Valentine Page</h2>
               <p className="text-gray-600">Start creating your personalized valentine page here. Be creative!</p>
@@ -395,7 +395,7 @@ const CreateWebPage = () => {
           </div>
           <div className="sticky top-8">
             <h2 className="text-xl font-semibold mb-4 text-gray-700">Preview</h2>
-            <div className="bg-white/50 backdrop-blur-sm p-4 rounded-lg">
+            <div className="bg-blue/50 backdrop-blur-sm p-4 rounded-lg">
               <TemplatePreview template={template} />
             </div>
           </div>

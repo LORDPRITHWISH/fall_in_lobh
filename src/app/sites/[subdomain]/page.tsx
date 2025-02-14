@@ -47,7 +47,7 @@ export default function Home() {
   }, []);
 
   return isLoading ? (
-    <div className="flex justify-center items-center h-screen w-full bg-gradient-to-b from-pink-100 via-pink-200 to-pink-300">
+    <div className="flex justify-center items-center h-screen w-full bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300">
       <Spinner />
     </div>
   ) : (

@@ -40,26 +40,19 @@ export default function HomePage() {
           <h1 className="text-2xl sm:text-3xl lg:text-6xl font-bold tracking-tighter text-center">
             Propose Your <AuroraText>juillet</AuroraText> in a Nerdy Way
           </h1>
-          <TextAnimate
-            animation="blurInUp"
-            by="character"
-            className="text-center"
-          >
+          <TextAnimate animation="blurInUp" by="character" className="text-center">
             Create your own valentine page in simple clicks
           </TextAnimate>
           <Link href={"/create?template=1"}>
             <RainbowButton className="mt-4">Get Started</RainbowButton>
           </Link>
         </div>
-        <h2 className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-700 via-pink-400 to-pink-700 text-center mb-8 mt-6 drop-shadow-lg animate-bounce">
+        <h2 className="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-400 to-blue-700 text-center mb-8 mt-6 drop-shadow-lg animate-bounce">
           Beautiful Picks
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-8">
           {templates.map((template) => (
-            <Card
-              key={template.id}
-              className="overflow-hidden transition-transform transform hover:rotate-3 hover:scale-105 hover:shadow-xl"
-            >
+            <Card key={template.id} className="overflow-hidden transition-transform transform hover:rotate-3 hover:scale-105 hover:shadow-xl">
               <Link href={`/create?template=${template.id}`}>
                 <CardContent className="p-0">
                   <div className="relative aspect-[3/4] w-full">
@@ -70,7 +63,7 @@ export default function HomePage() {
                       className="object-cover"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     />
-                    <h3 className="absolute bottom-5 left-5 text-white from-slate-400 to-slate-900 bg-slate-400 bg-opacity-60 px-3 py-1 rounded-md font-bold shadow-lg transform hover:scale-110 transition-transform bg-[url('/texture.png')] bg-cover bg-center">
+                    <h3 className="absolute bottom-5 left-5 text-blue from-slate-400 to-slate-900 bg-slate-400 bg-opacity-60 px-3 py-1 rounded-md font-bold shadow-lg transform hover:scale-110 transition-transform bg-[url('/texture.png')] bg-cover bg-center">
                       {template.title}
                     </h3>
                   </div>

@@ -24,9 +24,9 @@ interface Temp1Props {
 const Logo = ({ prev = false }: { prev: boolean }) => (
   <div className="absolute w-full flex items-center justify-center">
     <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className={`fixed z-50 snap-x ${prev ? "bottom-8" : "bottom-4"}`}>
-      <motion.div whileHover={{ scale: 1.3, rotate: [0, -5, 5, 0] }} className={`flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full ${prev ? "px-1" : "px-4 py-2"}`}>
-        <Code className="w-6 h-6 text-white" />
-        <span className="text-white font-bold">Zenux Studios</span>
+      <motion.div whileHover={{ scale: 1.3, rotate: [0, -5, 5, 0] }} className={`flex items-center gap-2 bg-blue/10 backdrop-blur-sm rounded-full ${prev ? "px-1" : "px-4 py-2"}`}>
+        <Code className="w-6 h-6 text-blue" />
+        <span className="text-blue font-bold">Zenux Studios</span>
       </motion.div>
     </motion.div>
   </div>
@@ -86,26 +86,25 @@ const EmotiveFace = ({ mood = "happy", noCount = 0, prev = false }: { mood?: str
   );
 };
 
-const FloatingEmoji = ({ emoji, delay = 0 }: { emoji: string; delay?: number }) => (
-  <motion.div
-    initial={{ y: "100vh", x: Math.random() * window.innerWidth, rotate: 0 }}
-    animate={{
-      y: "-100vh",
-      x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth, Math.random() * window.innerWidth],
-      rotate: [0, 360, 720],
-      scale: [1, 1.5, 1],
-    }}
-    transition={{
-      duration: 15 + Math.random() * 8,
-      delay,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-    className="absolute text-6xl pointer-events-none opacity-50"
-  >
-    {emoji}
-  </motion.div>
-);
+const FloatingEmoji = ({ emoji, delay = 0, index }: { emoji: string; delay?: number; index: number }) => {
+  // Unique movement patterns based on index
+  const animationName = `float-${index % 4}`; // 4 different animation patterns
+  const animationDuration = 15 + Math.random() * 5; // Randomize duration
+  const initialX = Math.random() * 100; // Random starting position
+
+  return (
+    <div
+      className="absolute text-6xl pointer-events-none opacity-50"
+      style={{
+        animation: `${animationName} ${animationDuration}s ${delay}s infinite linear`,
+        transform: `translate(${initialX}vw, 100vh)`,
+        willChange: "transform, opacity",
+      }}
+    >
+      {emoji}
+    </div>
+  );
+};
 
 const ColorBubble = ({ delay = 0 }: { delay?: number }) => (
   <motion.div
@@ -123,7 +122,7 @@ const ColorBubble = ({ delay = 0 }: { delay?: number }) => (
       repeat: Infinity,
       ease: "easeInOut",
     }}
-    className={`absolute rounded-full bg-white/10 blur-xl pointer-events-none`}
+    className={`absolute rounded-full bg-blue/10 blur-xl pointer-events-none`}
   />
 );
 
@@ -138,7 +137,7 @@ const SparkleEffect = ({ x, y }: { x: number; y: number }) => (
     className="absolute w-4 h-4"
     style={{ left: x, top: y }}
   >
-    <Sparkles className="w-full h-full text-white/30" />
+    <Sparkles className="w-full h-full text-blue/30" />
   </motion.div>
 );
 
@@ -177,13 +176,13 @@ const CelebrationPopup = ({
           ease: "easeInOut",
         },
       }}
-      className="bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl relative overflow-hidden"
+      className="bg-blue rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl relative overflow-hidden"
       onClick={(e) => e.stopPropagation()}
     >
       <motion.div
         className="absolute inset-0 opacity-30"
         animate={{
-          background: ["linear-gradient(45deg, #ff69b4, #ff1493)", "linear-gradient(45deg, #ff1493, #ff69b4)", "linear-gradient(45deg, #ff69b4, #ff1493)"],
+          background: ["linear-gradient(45deg, blueff69b4, blueff1493)", "linear-gradient(45deg, blueff1493, blueff69b4)", "linear-gradient(45deg, blueff69b4, blueff1493)"],
         }}
         transition={{
           duration: 3,
@@ -204,7 +203,7 @@ const CelebrationPopup = ({
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-          <h2 className={`font-bold text-pink-500 ${prev ? "text-2xl mb-1" : "text-3xl mb-4"}`}>Yay! 🎉</h2>
+          <h2 className={`font-bold text-blue-500 ${prev ? "text-2xl mb-1" : "text-3xl mb-4"}`}>Yay! 🎉</h2>
           <p className={`text-gray-600 ${prev ? "text-sm mb-1" : "text-lg mb-6"}`}>{celebrationMessage}</p>
         </motion.div>
 
@@ -233,7 +232,7 @@ const CelebrationPopup = ({
         <motion.button
           whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
           whileTap={{ scale: 0.95 }}
-          className={`px-6 py-2 bg-pink-500 text-white rounded-full font-semibold shadow-lg hover:bg-pink-600 transition-colors ${prev ? "text-sm mt-2" : "text-lg mt-8"}`}
+          className={`px-6 py-2 bg-blue-500 text-blue rounded-full font-semibold shadow-lg hover:bg-blue-600 transition-colors ${prev ? "text-sm mt-2" : "text-lg mt-8"}`}
           onClick={() => (window.location.href = "https://myvalentine.live")}
         >
           Continue Celebrating 🎉
@@ -279,9 +278,11 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
   const noButtonControls = useAnimation();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const emojis = ["💖", "✨", "🌹", "💝", "🎵", "🦋", "🌈", "💫", "🎀"];
-
-  const yesButtonScales = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.57, 2.58, 2.6, 3, 3.3];
+  // Expanded emoji list with more variety
+  const emojis = ["💖", "✨", "🌹", "💝", "🎵", "🦋", "🌈", "💫", "🎀", "🌸", "🍀", "🌟", "🌠", "🌷", "🌼", "🌺"];
+  const yesButtonScales = [
+    1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.57, 2.58, 2.6, 3, 3.3, 3.6, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
+  ];
 
   useEffect(() => {
     if (showEmojis) {
@@ -304,17 +305,17 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
   }
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (Math.random() > 0.8) {
+    // Debounce to reduce state updates
+    if (Math.random() > 0.9) {
+      // Reduced frequency of sparkles
       const newSparkle = {
         id: Date.now(),
         x: e.clientX,
         y: e.clientY,
       };
-      setSparkles((prev) => [...prev.slice(-5), newSparkle]);
+      setSparkles((prev) => [...prev.slice(-3), newSparkle]); // Limit to 3 sparkles
     }
-    setMousePos({ x: e.clientX, y: e.clientY });
   };
-
   // if (step >= messages.length) {
   //   return <div>Invalid step.</div>;
   // }
@@ -341,7 +342,7 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
   if (!showEmojis) {
     return (
       <div
-        className={`flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-pink-400 to-pink-600 ${prev ? "min-h-[60dvh]" : "min-h-[100dvh]"}`}
+        className={`flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 ${prev ? "min-h-[60dvh]" : "min-h-[100dvh]"}`}
         onMouseMove={handleMouseMove}
       >
         <Logo prev={prev} />
@@ -360,13 +361,13 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
               times: [0, 0.2, 0.8, 1],
             }}
           >
-            <Heart className="w-24 h-24 md:w-32 md:h-32 text-white fill-white mb-8 mx-auto" />
+            <Heart className="w-24 h-24 md:w-32 md:h-32 text-blue fill-blue mb-8 mx-auto" />
           </motion.div>
           <motion.button
             whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowEmojis(true)}
-            className="px-6 py-2 md:px-8 md:py-3 rounded-full bg-white text-pink-600 font-semibold text-lg md:text-xl flex items-center gap-2 mx-auto shadow-lg"
+            className="px-6 py-2 md:px-8 md:py-3 rounded-full bg-blue text-blue-600 font-semibold text-lg md:text-xl flex items-center gap-2 mx-auto shadow-lg"
           >
             <Sparkles className="w-5 h-5 md:w-6 md:h-6" />
             Begin Magic
@@ -377,20 +378,82 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
   }
 
   return (
-    <div className={`${prev ? "h-[60dvh]" : "min-h-[100dvh]"} overflow-hidden relative bg-gradient-to-br from-pink-400 to-pink-600`} onMouseMove={handleMouseMove}>
+    <div className={`${prev ? "h-[60dvh]" : "min-h-[100dvh]"} overflow-hidden relative bg-gradient-to-br from-blue-400 to-blue-600`} onMouseMove={handleMouseMove}>
       <Logo prev={prev} />
 
       {sparkles.map((sparkle) => (
         <SparkleEffect key={sparkle.id} x={sparkle.x} y={sparkle.y} />
       ))}
 
-      {Array.from({ length: 8 }).map((_, i) => (
+      {Array.from({ length: 4 }).map((_, i) => (
         <ColorBubble key={i} delay={i * 0.3} />
       ))}
 
-      {Array.from({ length: 6 }).map((_, i) => (
-        <FloatingEmoji key={`emoji-${i}`} emoji={emojis[i % emojis.length]} delay={i * 0.3} />
+      {Array.from({ length: 8 }).map((_, i) => (
+        <FloatingEmoji key={`emoji-${i}`} emoji={emojis[i % emojis.length]} delay={i * 0.3} index={i} />
       ))}
+
+      <style jsx global>{`
+        @keyframes float-0 {
+          0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 0.5;
+            transform: translateY(50vh) rotate(180deg);
+          }
+          100% {
+            transform: translateY(-20vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes float-1 {
+          0% {
+            transform: translate(0, 100vh) rotate(0deg);
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.7;
+            transform: translate(20vw, 50vh) rotate(180deg);
+          }
+          100% {
+            transform: translate(40vw, -20vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes float-2 {
+          0% {
+            transform: translate(100vw, 100vh) rotate(0deg);
+            opacity: 0.4;
+          }
+          50% {
+            opacity: 0.8;
+            transform: translate(80vw, 50vh) rotate(180deg);
+          }
+          100% {
+            transform: translate(60vw, -20vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes float-3 {
+          0% {
+            transform: translate(50vw, 100vh) rotate(0deg);
+            opacity: 0.5;
+          }
+          50% {
+            opacity: 0.8;
+            transform: translate(30vw, 50vh) rotate(180deg);
+          }
+          100% {
+            transform: translate(10vw, -20vh) rotate(360deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -405,36 +468,8 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
           }}
           className="absolute inset-0 flex items-center justify-center p-4"
         >
-          <motion.div className="text-center text-white" initial={{ y: 20, rotateX: 90 }} animate={{ y: 0, rotateX: 0 }} transition={{ type: "spring", stiffness: 200 }}>
+          <motion.div className="text-center text-blue" initial={{ y: 20, rotateX: 90 }} animate={{ y: 0, rotateX: 0 }} transition={{ type: "spring", stiffness: 200 }}>
             <EmotiveFace mood={moods[step]} noCount={noCount} />
-            {/* <motion.div className="perspective-text">
-              {Array.from(messages[step]).map((char, index) =>
-                char === " " ? (
-                  <span
-                    key={index}
-                    className={`inline-block ${prev ? "w-1" : "w-4 md:w-6"}`}
-                  />
-                ) : (
-                  <motion.span
-                    key={index}
-                    variants={textVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    custom={index}
-                    className={`inline-block font-bold ${
-                      prev ? "text-xl md:text-2xl" : "text-4xl md:text-6xl"
-                    }`}
-                    style={{
-                      textShadow: "0 0 20px rgba(255,255,255,0.2)",
-                      fontFamily: "'Noto Color Emoji', sans-serif",
-                    }}
-                  >
-                    {char}
-                  </motion.span>
-                )
-              )}
-            </motion.div> */}
 
             <motion.div
               className="perspective-text"
@@ -442,39 +477,50 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "center",
-                maxWidth: "100%", // Ensure it doesn't overflow the screen
+                maxWidth: "100%",
+                lineHeight: "2", // Line spacing
+                gap: "0.75em", // Space between lines
               }}
             >
-              {messages[step].split(" ").map((word, wordIndex) => (
-                <motion.span
-                  key={wordIndex}
-                  style={{ display: "inline-block", marginRight: "0.25em" }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: wordIndex * 0.5, // Delay each word's animation
-                    duration: 0.5,
-                  }}
-                >
-                  {Array.from(word).map((char, charIndex) => (
-                    <motion.span
-                      key={charIndex}
-                      variants={textVariants}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                      custom={charIndex}
-                      className={`inline-block font-bold ${prev ? "text-xl md:text-2xl" : "text-4xl md:text-6xl"}`}
-                      style={{
-                        textShadow: "0 0 20px rgba(255,255,255,0.2)",
-                        fontFamily: "'Noto Color Emoji', sans-serif",
-                      }}
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
-                </motion.span>
-              ))}
+              {messages[step].split(" ").map((word, wordIndex) => {
+                // Calculate the total characters before this word
+                const previousWords = messages[step].split(" ").slice(0, wordIndex);
+                const totalPreviousChars = previousWords.join("").length;
+
+                return (
+                  <motion.span
+                    key={wordIndex}
+                    style={{
+                      display: "inline-block",
+                      marginRight: "0.75em", // Space between words
+                    }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: totalPreviousChars * 0.05, // Sync with character animation
+                      duration: 0.5,
+                    }}
+                  >
+                    {Array.from(word).map((char, charIndex) => (
+                      <motion.span
+                        key={charIndex}
+                        variants={textVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        custom={totalPreviousChars + charIndex} // Global character index
+                        className={`inline-block font-bold ${prev ? "text-xl md:text-2xl" : "text-4xl md:text-6xl"}`}
+                        style={{
+                          textShadow: "0 0 20px rgba(255,255,255,0.2)",
+                          fontFamily: "'Noto Color Emoji', sans-serif",
+                        }}
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </motion.span>
+                );
+              })}
             </motion.div>
 
             {step === messages.length - 1 && (
@@ -498,12 +544,12 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
                   animate={{
                     scale: yesButtonScales[Math.min(noCount, yesButtonScales.length - 1)],
                   }}
-                  className={`rounded-full bg-white text-pink-500 font-bold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all ${
+                  className={`rounded-full bg-blue text-blue-500 font-bold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all ${
                     prev ? "text-xl px-4 py-2" : "text-2xl px-6 py-3 md:px-8 md:py-4"
                   }`}
                   onClick={() => setShowCelebration(true)}
                 >
-                  <Heart className={`fill-pink-500`} />
+                  <Heart className={`fill-blue-500`} />
                   Yes!
                 </motion.button>
 
@@ -512,7 +558,7 @@ export default function Temp1({ title, messages, moods, prev = false, noButtonMe
                   animate={noButtonControls}
                   onHoverStart={handleNoButtonHover}
                   onClick={() => setNoCount((prev) => prev + 1)}
-                  className={`rounded-full bg-white/10 backdrop-blur-sm text-white font-bold flex items-center gap-2 border border-white/20 ${
+                  className={`rounded-full bg-blue/10 backdrop-blur-sm text-blue font-bold flex items-center gap-2 border border-blue/20 ${
                     prev ? "text-sm px-4 py-2" : "text-lg px-6 py-3 md:px-8 md:py-4"
                   }`}
                   whileHover={{ scale: 1.1 }}
