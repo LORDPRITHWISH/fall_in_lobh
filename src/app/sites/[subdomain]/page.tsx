@@ -32,7 +32,7 @@ export default function Home() {
   const getSiteDetails = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`https://myvalentine.live/api/website?query=${subdomain}`);
+      const response = await axios.get(`/api/website?query=${subdomain}`);
       setSiteDetails(response.data.website);
       setIsLoading(false);
     } catch (error) {
