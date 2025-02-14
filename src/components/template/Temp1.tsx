@@ -23,17 +23,8 @@ interface Temp1Props {
 
 const Logo = ({ prev = false }: { prev: boolean }) => (
   <div className="absolute w-full flex items-center justify-center">
-    <motion.div
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`fixed z-50 snap-x ${prev ? "bottom-8" : "bottom-4"}`}
-    >
-      <motion.div
-        whileHover={{ scale: 1.3, rotate: [0, -5, 5, 0] }}
-        className={`flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full ${
-          prev ? "px-1" : "px-4 py-2"
-        }`}
-      >
+    <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className={`fixed z-50 snap-x ${prev ? "bottom-8" : "bottom-4"}`}>
+      <motion.div whileHover={{ scale: 1.3, rotate: [0, -5, 5, 0] }} className={`flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full ${prev ? "px-1" : "px-4 py-2"}`}>
         <Code className="w-6 h-6 text-white" />
         <span className="text-white font-bold">Zenux Studios</span>
       </motion.div>
@@ -41,15 +32,7 @@ const Logo = ({ prev = false }: { prev: boolean }) => (
   </div>
 );
 
-const EmotiveFace = ({
-  mood = "happy",
-  noCount = 0,
-  prev = false,
-}: {
-  mood?: string;
-  noCount?: number;
-  prev?: boolean;
-}) => {
+const EmotiveFace = ({ mood = "happy", noCount = 0, prev = false }: { mood?: string; noCount?: number; prev?: boolean }) => {
   const expressions: Record<string, string> = {
     superHappy: "🥰",
     happy: "😊",
@@ -103,22 +86,12 @@ const EmotiveFace = ({
   );
 };
 
-const FloatingEmoji = ({
-  emoji,
-  delay = 0,
-}: {
-  emoji: string;
-  delay?: number;
-}) => (
+const FloatingEmoji = ({ emoji, delay = 0 }: { emoji: string; delay?: number }) => (
   <motion.div
     initial={{ y: "100vh", x: Math.random() * window.innerWidth, rotate: 0 }}
     animate={{
       y: "-100vh",
-      x: [
-        Math.random() * window.innerWidth,
-        Math.random() * window.innerWidth,
-        Math.random() * window.innerWidth,
-      ],
+      x: [Math.random() * window.innerWidth, Math.random() * window.innerWidth, Math.random() * window.innerWidth],
       rotate: [0, 360, 720],
       scale: [1, 1.5, 1],
     }}
@@ -296,15 +269,7 @@ const textVariants = {
   },
 };
 
-export default function Temp1({
-  title,
-  messages,
-  moods,
-  prev = false,
-  noButtonMessages,
-  celebrationMediaUrl,
-  celebrationMessage,
-}: Temp1Props) {
+export default function Temp1({ title, messages, moods, prev = false, noButtonMessages, celebrationMediaUrl, celebrationMessage }: Temp1Props) {
   const [step, setStep] = useState(0);
   const [showEmojis, setShowEmojis] = useState(false);
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
@@ -316,10 +281,7 @@ export default function Temp1({
 
   const emojis = ["💖", "✨", "🌹", "💝", "🎵", "🦋", "🌈", "💫", "🎀"];
 
-  const yesButtonScales = [
-    1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5,
-    2.57, 2.58, 2.6, 3, 3.3,
-  ];
+  const yesButtonScales = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.57, 2.58, 2.6, 3, 3.3];
 
   useEffect(() => {
     if (showEmojis) {
@@ -379,17 +341,11 @@ export default function Temp1({
   if (!showEmojis) {
     return (
       <div
-        className={`flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-pink-400 to-pink-600 ${
-          prev ? "min-h-[60dvh]" : "min-h-[100dvh]"
-        }`}
+        className={`flex items-center justify-center p-4 overflow-hidden bg-gradient-to-br from-pink-400 to-pink-600 ${prev ? "min-h-[60dvh]" : "min-h-[100dvh]"}`}
         onMouseMove={handleMouseMove}
       >
         <Logo prev={prev} />
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="text-center relative"
-        >
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="text-center relative">
           {sparkles.map((sparkle) => (
             <SparkleEffect key={sparkle.id} x={sparkle.x} y={sparkle.y} />
           ))}
@@ -421,12 +377,7 @@ export default function Temp1({
   }
 
   return (
-    <div
-      className={`${
-        prev ? "h-[60dvh]" : "min-h-[100dvh]"
-      } overflow-hidden relative bg-gradient-to-br from-pink-400 to-pink-600`}
-      onMouseMove={handleMouseMove}
-    >
+    <div className={`${prev ? "h-[60dvh]" : "min-h-[100dvh]"} overflow-hidden relative bg-gradient-to-br from-pink-400 to-pink-600`} onMouseMove={handleMouseMove}>
       <Logo prev={prev} />
 
       {sparkles.map((sparkle) => (
@@ -438,11 +389,7 @@ export default function Temp1({
       ))}
 
       {Array.from({ length: 6 }).map((_, i) => (
-        <FloatingEmoji
-          key={`emoji-${i}`}
-          emoji={emojis[i % emojis.length]}
-          delay={i * 0.3}
-        />
+        <FloatingEmoji key={`emoji-${i}`} emoji={emojis[i % emojis.length]} delay={i * 0.3} />
       ))}
 
       <AnimatePresence mode="wait">
@@ -458,14 +405,9 @@ export default function Temp1({
           }}
           className="absolute inset-0 flex items-center justify-center p-4"
         >
-          <motion.div
-            className="text-center text-white"
-            initial={{ y: 20, rotateX: 90 }}
-            animate={{ y: 0, rotateX: 0 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+          <motion.div className="text-center text-white" initial={{ y: 20, rotateX: 90 }} animate={{ y: 0, rotateX: 0 }} transition={{ type: "spring", stiffness: 200 }}>
             <EmotiveFace mood={moods[step]} noCount={noCount} />
-            <motion.div className="perspective-text">
+            {/* <motion.div className="perspective-text">
               {Array.from(messages[step]).map((char, index) =>
                 char === " " ? (
                   <span
@@ -492,6 +434,47 @@ export default function Temp1({
                   </motion.span>
                 )
               )}
+            </motion.div> */}
+
+            <motion.div
+              className="perspective-text"
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                maxWidth: "100%", // Ensure it doesn't overflow the screen
+              }}
+            >
+              {messages[step].split(" ").map((word, wordIndex) => (
+                <motion.span
+                  key={wordIndex}
+                  style={{ display: "inline-block", marginRight: "0.25em" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    delay: wordIndex * 0.5, // Delay each word's animation
+                    duration: 0.5,
+                  }}
+                >
+                  {Array.from(word).map((char, charIndex) => (
+                    <motion.span
+                      key={charIndex}
+                      variants={textVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      custom={charIndex}
+                      className={`inline-block font-bold ${prev ? "text-xl md:text-2xl" : "text-4xl md:text-6xl"}`}
+                      style={{
+                        textShadow: "0 0 20px rgba(255,255,255,0.2)",
+                        fontFamily: "'Noto Color Emoji', sans-serif",
+                      }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.span>
+              ))}
             </motion.div>
 
             {step === messages.length - 1 && (
@@ -513,15 +496,10 @@ export default function Temp1({
                   }}
                   whileTap={{ scale: 0.9 }}
                   animate={{
-                    scale:
-                      yesButtonScales[
-                        Math.min(noCount, yesButtonScales.length - 1)
-                      ],
+                    scale: yesButtonScales[Math.min(noCount, yesButtonScales.length - 1)],
                   }}
                   className={`rounded-full bg-white text-pink-500 font-bold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all ${
-                    prev
-                      ? "text-xl px-4 py-2"
-                      : "text-2xl px-6 py-3 md:px-8 md:py-4"
+                    prev ? "text-xl px-4 py-2" : "text-2xl px-6 py-3 md:px-8 md:py-4"
                   }`}
                   onClick={() => setShowCelebration(true)}
                 >
@@ -535,18 +513,12 @@ export default function Temp1({
                   onHoverStart={handleNoButtonHover}
                   onClick={() => setNoCount((prev) => prev + 1)}
                   className={`rounded-full bg-white/10 backdrop-blur-sm text-white font-bold flex items-center gap-2 border border-white/20 ${
-                    prev
-                      ? "text-sm px-4 py-2"
-                      : "text-lg px-6 py-3 md:px-8 md:py-4"
+                    prev ? "text-sm px-4 py-2" : "text-lg px-6 py-3 md:px-8 md:py-4"
                   }`}
                   whileHover={{ scale: 1.1 }}
                 >
                   <XCircle className="w-5 h-5 md:w-6 md:h-6" />
-                  {
-                    noButtonMessages[
-                      Math.min(noCount, noButtonMessages.length - 1)
-                    ]
-                  }
+                  {noButtonMessages[Math.min(noCount, noButtonMessages.length - 1)]}
                 </motion.button>
               </motion.div>
             )}
