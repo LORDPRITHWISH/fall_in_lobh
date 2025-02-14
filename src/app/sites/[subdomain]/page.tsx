@@ -37,7 +37,7 @@ export default function Home() {
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching site details:", error);
-      router.push("/404");
+      // router.push("/404");
       setIsLoading(false);
     }
   };
