@@ -21,10 +21,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (domainExists) {
-      return NextResponse.json(
-        { error: "domain already exists" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "domain already exists" }, { status: 400 });
     }
 
     const createWebsite = await prisma.website.create({
@@ -41,10 +38,7 @@ export async function POST(req: NextRequest) {
     );
   } catch (error) {
     console.error("Error creating website:", error);
-    return NextResponse.json(
-      { success: false, message: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500 });
   }
 }
 
@@ -58,26 +52,17 @@ export async function GET(req: NextRequest) {
   try {
     const website = await prisma.website.findFirst({
       where: {
-        OR: [
-          { id: !isNaN(Number(query)) ? parseInt(query) : undefined },
-          { webUrl: `https://${query}.zenux.live` },
-        ],
+        OR: [{ id: !isNaN(Number(query)) ? parseInt(query) : undefined }, { webUrl: `https://${query}.myvalentine.live` }],
       },
     });
 
     if (!website) {
-      return NextResponse.json(
-        { success: false, message: "Website not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, message: "Website not found" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, website }, { status: 200 });
   } catch (error) {
     console.error("Error fetching website:", error);
-    return NextResponse.json(
-      { success: false, message: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500 });
   }
 }
