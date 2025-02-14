@@ -210,11 +210,7 @@ const CelebrationPopup = ({
       <motion.div
         className="absolute inset-0 opacity-30"
         animate={{
-          background: [
-            "linear-gradient(45deg, #ff69b4, #ff1493)",
-            "linear-gradient(45deg, #ff1493, #ff69b4)",
-            "linear-gradient(45deg, #ff69b4, #ff1493)",
-          ],
+          background: ["linear-gradient(45deg, #ff69b4, #ff1493)", "linear-gradient(45deg, #ff1493, #ff69b4)", "linear-gradient(45deg, #ff69b4, #ff1493)"],
         }}
         transition={{
           duration: 3,
@@ -229,46 +225,17 @@ const CelebrationPopup = ({
           initial={{ scale: 0 }}
           animate={{ scale: 1, rotate: [0, 360] }}
           transition={{ type: "spring", damping: 8, delay: 0.2 }}
-          className={`mx-auto rounded-2xl overflow-hidden ${
-            prev ? "w-32 h-32 mb-1" : "w-48 h-48 mb-6"
-          }`}
+          className={`mx-auto rounded-2xl overflow-hidden ${prev ? "w-32 h-32 mb-1" : "w-48 h-48 mb-6"}`}
         >
-          <Image
-            src={celebrationMediaUrl}
-            alt="Celebration"
-            width={192}
-            height={192}
-            className="w-full h-full object-cover"
-          />
+          <Image src={celebrationMediaUrl} alt="Celebration" width={192} height={192} className="w-full h-full object-cover" />
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <h2
-            className={`font-bold text-pink-500 ${
-              prev ? "text-2xl mb-1" : "text-3xl mb-4"
-            }`}
-          >
-            Yay! 🎉
-          </h2>
-          <p
-            className={`text-gray-600 ${
-              prev ? "text-sm mb-1" : "text-lg mb-6"
-            }`}
-          >
-            {celebrationMessage}
-          </p>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+          <h2 className={`font-bold text-pink-500 ${prev ? "text-2xl mb-1" : "text-3xl mb-4"}`}>Yay! 🎉</h2>
+          <p className={`text-gray-600 ${prev ? "text-sm mb-1" : "text-lg mb-6"}`}>{celebrationMessage}</p>
         </motion.div>
 
-        <motion.div
-          className="flex justify-center gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
+        <motion.div className="flex justify-center gap-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
           {Array.from({ length: 5 }).map((_, i) => (
             <motion.div
               key={i}
@@ -293,10 +260,8 @@ const CelebrationPopup = ({
         <motion.button
           whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
           whileTap={{ scale: 0.95 }}
-          className={`px-6 py-2 bg-pink-500 text-white rounded-full font-semibold shadow-lg hover:bg-pink-600 transition-colors ${
-            prev ? "text-sm mt-2" : "text-lg mt-8"
-          }`}
-          onClick={onClose}
+          className={`px-6 py-2 bg-pink-500 text-white rounded-full font-semibold shadow-lg hover:bg-pink-600 transition-colors ${prev ? "text-sm mt-2" : "text-lg mt-8"}`}
+          onClick={() => (window.location.href = "https://myvalentine.live")}
         >
           Continue Celebrating 🎉
         </motion.button>
@@ -595,6 +560,7 @@ export default function Temp1({
             onClose={() => {
               setShowCelebration(false);
               setStep(0);
+              setNoCount(0);
             }}
             celebrationMediaUrl={celebrationMediaUrl}
             celebrationMessage={celebrationMessage}
