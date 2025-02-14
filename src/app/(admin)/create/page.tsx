@@ -10,24 +10,11 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Loader, Plus, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Spinner from "@/components/spinner/Spinner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -44,6 +31,73 @@ const formSchema = z.object({
 
 const generateRandomSubdomain = () => {
   return Math.random().toString(36).substring(2, 7);
+};
+
+const EMOJI_OPTIONS = [
+  { label: "superHappy", imoji: "🥰", value: "superHappy" },
+  { label: "happy", imoji: "😊", value: "happy" },
+  { label: "excited", imoji: "😍", value: "excited" },
+  { label: "hopeful", imoji: "🤗", value: "hopeful" },
+  { label: "nervous", imoji: "😅", value: "nervous" },
+  { label: "question", imoji: "🤔", value: "question" },
+  { label: "inocent", imoji: "😇", value: "inocent" },
+  { label: "excited2", imoji: "🥳", value: "excited2" },
+  { label: "horny", imoji: "😏", value: "horny" },
+  { label: "heart", imoji: "❤️", value: "heart" },
+  { label: "sad1", imoji: "😕", value: "sad1" },
+  { label: "sad2", imoji: "😢", value: "sad2" },
+  { label: "sad3", imoji: "😭", value: "sad3" },
+  { label: "sad4", imoji: "🥺", value: "sad4" },
+  { label: "celebration", imoji: "🤩", value: "celebration" },
+];
+
+const MessageWithMood = ({ messageIndex, control, onRemove }: { messageIndex: number; control: any; onRemove: () => void }) => {
+  return (
+    <div className="flex gap-2">
+      <div className="flex-1">
+        <FormField
+          control={control}
+          name={`messages.${messageIndex}`}
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input placeholder="Enter message..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+      <div className="w-15">
+        <FormField
+          control={control}
+          name={`moods.${messageIndex}`}
+          render={({ field }) => (
+            <FormItem>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Mood" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {EMOJI_OPTIONS.map((emoji) => (
+                    <SelectItem className="text-center" key={emoji.value} value={emoji.value}>
+                      {emoji.imoji}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
+      <Button onClick={onRemove} type="button" variant="destructive" size="icon" className="w-6 h-6 self-center">
+        <X className="w-4 h-4" />
+      </Button>
+    </div>
+  );
 };
 
 const CreateWebPage = () => {
@@ -64,28 +118,6 @@ const CreateWebPage = () => {
     domain: "myvalentine.live",
   });
 
-  useEffect(() => {
-    getTemplateDetails();
-  }, []);
-
-  const EMOJI_OPTIONS = [
-    { label: "superHappy", imoji: "🥰", value: "superHappy" },
-    { label: "happy", imoji: "😊", value: "happy" },
-    { label: "excited", imoji: "😍", value: "excited" },
-    { label: "hopeful", imoji: "🤗", value: "hopeful" },
-    { label: "nervous", imoji: "😅", value: "nervous" },
-    { label: "question", imoji: "🤔", value: "question" },
-    { label: "inocent", imoji: "😇", value: "inocent" },
-    { label: "excited2", imoji: "🥳", value: "excited2" },
-    { label: "horny", imoji: "😏", value: "horny" },
-    { label: "heart", imoji: "❤️", value: "heart" },
-    { label: "sad1", imoji: "😕", value: "sad1" },
-    { label: "sad2", imoji: "😢", value: "sad2" },
-    { label: "sad3", imoji: "😭", value: "sad3" },
-    { label: "sad4", imoji: "🥺", value: "sad4" },
-    { label: "celebration", imoji: "🤩", value: "celebration" },
-  ];
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -104,81 +136,10 @@ const CreateWebPage = () => {
     control: form.control,
   });
 
-  const MessageWithMood = ({ messageIndex }: { messageIndex: number }) => {
-    return (
-      <div className="flex gap-2">
-        <div className="flex-1">
-          <FormField
-            control={form.control}
-            name={`messages.${messageIndex}`}
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Enter message..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <div className="w-15">
-          <FormField
-            control={form.control}
-            name={`moods.${messageIndex}`}
-            render={({ field }) => (
-              <FormItem>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Mood" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {EMOJI_OPTIONS.map((emoji) => (
-                      <SelectItem
-                        className="text-center"
-                        key={emoji.value}
-                        value={emoji.value}
-                      >
-                        {emoji.imoji}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button
-          onClick={() => {
-            const newMessages = [...form.getValues("messages")];
-            const newMoods = [...form.getValues("moods")];
-            newMessages.splice(messageIndex, 1);
-            newMoods.splice(messageIndex, 1);
-            form.setValue("messages", newMessages);
-            form.setValue("moods", newMoods);
-          }}
-          type="button"
-          variant="destructive"
-          size="icon"
-          className="w-6 h-6 self-center"
-        >
-          <X className="w-4 h-4" />
-        </Button>
-      </div>
-    );
-  };
-
   const getTemplateDetails = async () => {
     setTemplateLoader(true);
     try {
       const response = await axios.get(`/api/website?query=${templateId}`);
-      console.log(response.data.website);
-
       setTemplate({
         title: response.data.website.title,
         moods: response.data.website.moods,
@@ -204,14 +165,18 @@ const CreateWebPage = () => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "something went wrong",
+        description: "Something went wrong",
       });
       setTemplateLoader(false);
     }
   };
+
+  useEffect(() => {
+    getTemplateDetails();
+  }, []);
+
   useEffect(() => {
     if (formValues) {
-      console.log(formValues);
       setTemplate({
         title: formValues.title || "",
         moods: formValues.moods || [],
@@ -222,21 +187,19 @@ const CreateWebPage = () => {
         subdomain: formValues.subdomain || generateRandomSubdomain(),
         domain: "myvalentine.live",
       });
-      console.log(template);
     }
-  }, [formValues, setTemplate]);
+  }, [formValues]);
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setFormLoader(true);
-    console.log(values);
     try {
       const response = await axios.post("/api/website", {
         ...values,
         webUrl: `https://${values.subdomain}.${values.domain}`,
       });
       toast({
-        title: "contgratulations",
-        description: "website created successfully",
+        title: "Congratulations",
+        description: "Website created successfully",
       });
       setTimeout(() => {
         router.push(`/preview?url=${response.data.createWebsite.webUrl}`);
@@ -247,18 +210,19 @@ const CreateWebPage = () => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "something went wrong",
+        description: "Something went wrong",
       });
       setFormLoader(false);
     }
-  }
+  };
 
-  if (templateLoader)
+  if (templateLoader) {
     return (
       <div className="flex justify-center items-center h-screen">
         <Spinner />
       </div>
     );
+  }
 
   return (
     <div className="min-h-screen">
@@ -272,8 +236,8 @@ const CreateWebPage = () => {
             </div>
 
             <Card className="p-2 md:p-4 space-y-4">
-              <ScrollArea className="rounded-md h-full md:h-[500px] p-4 ">
-                <div className=" mb-14">
+              <ScrollArea className="rounded-md h-full md:h-[500px] p-4">
+                <div className="mb-14">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                       <div className="space-y-4">
@@ -282,7 +246,7 @@ const CreateWebPage = () => {
                           name="title"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Name of ur special one</FormLabel>
+                              <FormLabel>Name of your special one</FormLabel>
                               <FormControl>
                                 <Input placeholder="Romeo" {...field} />
                               </FormControl>
@@ -293,7 +257,19 @@ const CreateWebPage = () => {
                         <div className="space-y-4">
                           <h3 className="font-semibold">Messages</h3>
                           {form.watch("messages").map((_, index) => (
-                            <MessageWithMood key={index} messageIndex={index} />
+                            <MessageWithMood
+                              key={index}
+                              messageIndex={index}
+                              control={form.control}
+                              onRemove={() => {
+                                const newMessages = [...form.getValues("messages")];
+                                const newMoods = [...form.getValues("moods")];
+                                newMessages.splice(index, 1);
+                                newMoods.splice(index, 1);
+                                form.setValue("messages", newMessages);
+                                form.setValue("moods", newMoods);
+                              }}
+                            />
                           ))}
                           <Button
                             onClick={() => {
@@ -349,7 +325,6 @@ const CreateWebPage = () => {
                       </div>
 
                       <Separator className="my-4" />
-                      <Separator className="my-4" />
 
                       <FormField
                         control={form.control}
@@ -378,6 +353,7 @@ const CreateWebPage = () => {
                           </FormItem>
                         )}
                       />
+
                       <div className="flex space-x-3">
                         <FormField
                           control={form.control}
@@ -429,7 +405,7 @@ const CreateWebPage = () => {
   );
 };
 
-const page = () => {
+const Page = () => {
   return (
     <Suspense>
       <CreateWebPage />
@@ -437,4 +413,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
